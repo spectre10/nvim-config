@@ -15,11 +15,41 @@ vim.api.nvim_create_autocmd({ "VimEnter", "BufNew" }, {
 
 return {
   lsp = {
+    setup_handlers = {
+      -- add custom handler
+      clangd = function(_, opts) require("clangd_extensions").setup { server = opts } end
+    },
+    config = {
+      clangd = {
+        cmd = {
+          "clangd",
+          "--all-scopes-completion",
+          "--suggest-missing-includes",
+          "--background-index",
+          "--pch-storage=disk",
+          "--cross-file-rename",
+          "--log=info",
+          "--completion-style=detailed",
+          "--enable-config", -- clangd 11+ supports reading from .clangd configuration file
+          "--clang-tidy",
+          "--clang-tidy-checks=-*,llvm-*,clang-analyzer-*,modernize-*,-modernize-use-trailing-return-type",
+          "--fallback-style=WebKit",
+          "--header-insertion=never",
+        },
+      },
+    },
     formatting = {
       format_on_save = false, -- enable or disable automatic formatting on save
     },
   },
   plugins = {
+    "p00f/clangd_extensions.nvim", -- install lsp plugin
+    {
+      "williamboman/mason-lspconfig.nvim",
+      opts = {
+        ensure_installed = { "clangd" }, -- automatically install lsp
+      },
+    },
     {
       "Pocco81/auto-save.nvim",
       config = function()
