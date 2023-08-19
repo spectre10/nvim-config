@@ -47,23 +47,29 @@ return {
   },
   plugins = {
     {
-      "AstroNvim/astrocommunity",
-      { import = "astrocommunity.completion.copilot-lua" },
-      { -- further customize the options set by the community
-        "copilot.lua",
-        opts = {
-          suggestion = {
-            keymap = {
-              accept = "<C-l>",
-              accept_word = false,
-              accept_line = false,
-              next = "<C-.>",
-              prev = "<C-,>",
-              dismiss = "<C/>",
-            },
-          },
-        },
+      "max397574/better-escape.nvim",
+      opts = {
+        mapping = {"jk","kj","jj"},
       },
+    },
+    {
+      "AstroNvim/astrocommunity",
+      -- { import = "astrocommunity.completion.copilot-lua" },
+      -- { -- further customize the options set by the community
+      --   "copilot.lua",
+      --   opts = {
+      --     suggestion = {
+      --       keymap = {
+      --         accept = "<C-l>",
+      --         accept_word = false,
+      --         accept_line = false,
+      --         next = "<C-.>",
+      --         prev = "<C-,>",
+      --         dismiss = "<C/>",
+      --       },
+      --     },
+      --   },
+      -- },
       -- ... import any community contributed plugins here
     },
     "p00f/clangd_extensions.nvim", -- install lsp plugin
