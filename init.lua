@@ -1,6 +1,12 @@
 local format_sync_grp = vim.api.nvim_create_augroup("GoImport", {})
 vim.api.nvim_create_autocmd({ "VimEnter", "BufNew" }, {
   pattern = "*.go",
+  command = "inoremap <C-f> <C-o>:GoImport<CR>",
+  group = format_sync_grp,
+})
+
+vim.api.nvim_create_autocmd({ "VimEnter", "BufNew" }, {
+  pattern = "*.go",
   command = "map <C-f> :GoImport<CR>",
   group = format_sync_grp,
 })
@@ -15,10 +21,6 @@ vim.api.nvim_create_autocmd({ "VimEnter", "BufNew" }, {
 
 return {
   lsp = {
-    setup_handlers = {
-      -- add custom handler
-      clangd = function(_, opts) require("clangd_extensions").setup { server = opts } end
-    },
     config = {
       clangd = {
         capabilities = {
