@@ -6,8 +6,8 @@ vim.api.nvim_create_autocmd({ "VimEnter", "BufNew" }, {
 })
 
 vim.api.nvim_create_autocmd({ "VimEnter", "BufNew" }, {
-  pattern = "*.go",
-  command = "map <C-f> :GoImport<CR>",
+  pattern = "*",
+  command = "set list listchars=tab:»\\ ,trail:·,eol:↲",
   group = format_sync_grp,
 })
 
@@ -20,6 +20,7 @@ vim.api.nvim_create_autocmd({ "VimEnter", "BufNew" }, {
 })
 
 return {
+  colorscheme = "catppuccin",
   lsp = {
     config = {
       clangd = {
@@ -49,6 +50,14 @@ return {
   },
   plugins = {
     {
+      "catppuccin/nvim",
+      name = "catppuccin",
+      priority = 1000,
+      opts = {
+        transparent_background = false,
+      },
+    },
+    {
       "max397574/better-escape.nvim",
       opts = {
         mapping = {"jk","kj","jj"},
@@ -56,22 +65,22 @@ return {
     },
     {
       "AstroNvim/astrocommunity",
-      -- { import = "astrocommunity.completion.copilot-lua" },
-      -- { -- further customize the options set by the community
-      --   "copilot.lua",
-      --   opts = {
-      --     suggestion = {
-      --       keymap = {
-      --         accept = "<C-l>",
-      --         accept_word = false,
-      --         accept_line = false,
-      --         next = "<C-.>",
-      --         prev = "<C-,>",
-      --         dismiss = "<C/>",
-      --       },
-      --     },
-      --   },
-      -- },
+      { import = "astrocommunity.completion.copilot-lua" },
+      { -- further customize the options set by the community
+        "copilot.lua",
+        opts = {
+          suggestion = {
+            keymap = {
+              accept = "<C-l>",
+              accept_word = false,
+              accept_line = false,
+              next = "<C-.>",
+              prev = "<C-,>",
+              dismiss = "<C/>",
+            },
+          },
+        },
+      },
       -- ... import any community contributed plugins here
     },
     "p00f/clangd_extensions.nvim", -- install lsp plugin
@@ -131,3 +140,4 @@ return {
     },
   },
 }
+
