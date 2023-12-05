@@ -1,14 +1,13 @@
 local format_sync_grp = vim.api.nvim_create_augroup("GoImport", {})
 vim.api.nvim_create_autocmd({ "VimEnter", "BufNew" }, {
   pattern = "*.go",
-  command = "inoremap <C-f> <C-o>:GoImport<CR>",
+  command = "map <C-f> <cmd>GoImport<CR>",
   group = format_sync_grp,
 })
 
 vim.api.nvim_create_autocmd({ "VimEnter", "BufNew" }, {
   pattern = "*",
   command = "set list listchars=tab:»\\ ,trail:·,eol:↲",
-  group = format_sync_grp,
 })
 
 local compile_cpp = vim.api.nvim_create_augroup("run_cpp", {})
