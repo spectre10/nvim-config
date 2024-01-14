@@ -16,7 +16,7 @@ return {
   {
     "AstroNvim/astrocommunity",
     { import = "astrocommunity.completion.copilot-lua" },
-    { -- further customize the options set by the community
+    {
       "copilot.lua",
       opts = {
         suggestion = {
@@ -31,13 +31,12 @@ return {
         },
       },
     },
-    -- ... import any community contributed plugins here
   },
-  "p00f/clangd_extensions.nvim", -- install lsp plugin
+  "p00f/clangd_extensions.nvim",
   {
     "williamboman/mason-lspconfig.nvim",
     opts = {
-      ensure_installed = { "clangd" }, -- automatically install lsp
+      ensure_installed = { "clangd" },
     },
   },
   {
@@ -72,18 +71,13 @@ return {
     end,
     event = { "CmdlineEnter" },
     ft = { "go", 'gomod' },
-    build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
+    build = ':lua require("go.install").update_all_sync()'
   },
   {
     "L3MON4D3/LuaSnip",
     config = function(plugin, opts)
-      -- include the default astronvim config that calls the setup call
       require "plugins.configs.luasnip"(plugin, opts)
-      -- load snippets paths
       require("luasnip.loaders.from_vscode").lazy_load {
-        -- this can be used if your configuration lives in ~/.config/nvim
-        -- if your configuration lives in ~/.config/astronvim, the full path
-        -- must be specified in the next line
         paths = { "./lua/user/snippets" }
       }
     end,
