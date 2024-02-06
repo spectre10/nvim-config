@@ -21,7 +21,7 @@ vim.api.nvim_create_autocmd({ "VimEnter", "BufNew" }, {
 
 -- git commit message width
 vim.api.nvim_create_autocmd({ "VimEnter", "BufNew" }, {
-  pattern = "COMMIT_EDITMSG",
+  pattern = {"COMMIT_EDITMSG", "*.patch"},
   command = "set colorcolumn=72",
   group = format_sync_grp,
 })
