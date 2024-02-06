@@ -19,6 +19,13 @@ vim.api.nvim_create_autocmd({ "VimEnter", "BufNew" }, {
   command = "set list listchars=tab:»\\ ,trail:·,eol:↲",
 })
 
+-- git commit message width
+vim.api.nvim_create_autocmd({ "VimEnter", "BufNew" }, {
+  pattern = "COMMIT_EDITMSG",
+  command = "set colorcolumn=72",
+  group = format_sync_grp,
+})
+
 -- for competitive programming
 local run_cpp = vim.api.nvim_create_augroup("run_cpp", {})
 vim.api.nvim_create_autocmd({ "VimEnter", "BufNew" }, {
