@@ -1,40 +1,19 @@
-local format_sync_grp = vim.api.nvim_create_augroup("GoImport", {})
+-- This file simply bootstraps the installation of Lazy.nvim and then calls other files for execution
+-- This file doesn't necessarily need to be touched, BE CAUTIOUS editing this file and proceed at your own risk.
+local lazypath = vim.env.LAZY or vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
+if not (vim.env.LAZY or (vim.uv or vim.loop).fs_stat(lazypath)) then
+  -- stylua: ignore
+  vim.fn.system({ "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable", lazypath })
+end
+vim.opt.rtp:prepend(lazypath)
 
--- normal mode
-vim.api.nvim_create_autocmd({ "VimEnter", "BufNew" }, {
-  pattern = "*.go",
-  command = "nmap <C-f> :GoImport<CR>",
-  group = format_sync_grp,
-})
--- insert mode
-vim.api.nvim_create_autocmd({ "VimEnter", "BufNew" }, {
-  pattern = "*.go",
-  command = "imap <C-f> <Esc>:GoImport<CR>a",
-  group = format_sync_grp,
-})
+-- validate that lazy is available
+if not pcall(require, "lazy") then
+  -- stylua: ignore
+  vim.api.nvim_echo({ { ("Unable to load lazy from: %s\n"):format(lazypath), "ErrorMsg" }, { "Press any key to exit...", "MoreMsg" } }, true, {})
+  vim.fn.getchar()
+  vim.cmd.quit()
+end
 
--- show tabs, trailing spaces and \n
-vim.api.nvim_create_autocmd({ "VimEnter", "BufNew" }, {
-  pattern = "*",
-  command = "set list listchars=tab:»\\ ,trail:·,eol:↲",
-})
-
--- git commit message width
-vim.api.nvim_create_autocmd({ "VimEnter", "BufNew" }, {
-  pattern = {"COMMIT_EDITMSG", "*.patch"},
-  command = "set colorcolumn=72",
-  group = format_sync_grp,
-})
-
--- for competitive programming
-local run_cpp = vim.api.nvim_create_augroup("run_cpp", {})
-vim.api.nvim_create_autocmd({ "VimEnter", "BufNew" }, {
-  pattern = "*.cpp",
-  command =
-  "map <F9> :lua vim.lsp.buf.format()<CR>:w<CR>:T cd %:p:h && g++ %:p -std=c++17 -fsanitize=undefined -fsanitize=address && ./a.out < input.txt && exit<CR>i",
-  group = run_cpp,
-})
-
-return {
-  colorscheme = "catppuccin",
-}
+require "lazy_setup"
+require "polish"
