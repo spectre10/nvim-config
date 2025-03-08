@@ -1,6 +1,6 @@
 return {
 	"AstroNvim/astrocommunity",
-	{ import = "astrocommunity.recipes.ai" },
+	-- { import = "astrocommunity.recipes.ai" },
 	{ import = "astrocommunity.completion.copilot-lua" },
 	{
 		"copilot.lua",
