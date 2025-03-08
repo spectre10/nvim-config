@@ -40,7 +40,22 @@ return {
 			return opts
 		end,
 	},
-	{ "max397574/better-escape.nvim", enabled = true },
+	{
+		"max397574/better-escape.nvim",
+		enabled = true,
+		opts = {
+			mappings = {
+				i = {
+					j = {
+						k = "<Esc>",
+					},
+					k = {
+						j = "<Esc>",
+					},
+				},
+			},
+		},
+	},
 
 	-- You can also easily customize additional setup of plugins that is outside of the plugin's setup call
 	{
@@ -89,41 +104,6 @@ return {
 			)
 		end,
 	},
-	"AstroNvim/astrocommunity",
-	{ import = "astrocommunity.completion.copilot-lua" },
-	{
-		"copilot.lua",
-		opts = {
-			suggestion = {
-				keymap = {
-					accept = "<C-l>",
-					accept_word = false,
-					accept_line = false,
-					next = "<C-.>",
-					prev = "<C-,>",
-					dismiss = "<C/>",
-				},
-			},
-		},
-	},
-	-- { import = "astrocommunity.completion.copilot-lua-cmp" },
-	{ import = "astrocommunity.editing-support.vim-visual-multi" },
-	{
-		"mg979/vim-visual-multi",
-		config = function()
-			vim.g.VM_default_mappings = 0
-			vim.g.VM_leader = "<Leader>m"
-			vim.g.VM_maps = {
-				select = "v",
-				select_line = "V",
-				-- select_word = "<C-n>",
-				add_cursor = "<C-n>",
-				remove_cursor = "<C-x>",
-				-- jump_to_next = "<C-n>",
-				-- jump_to_prev = "<C-p>",
-			}
-		end,
-	},
 	{
 		"rcarriga/nvim-notify",
 		opts = {
@@ -137,5 +117,22 @@ return {
 			--   TRACE = "✎",
 			-- },
 		},
+	},
+	{
+		"kawre/leetcode.nvim",
+		build = ":TSUpdate html", -- if you have `nvim-treesitter` installed
+		dependencies = {
+			"nvim-telescope/telescope.nvim",
+			-- "ibhagwan/fzf-lua",
+			"nvim-lua/plenary.nvim",
+			"MunifTanjim/nui.nvim",
+		},
+		opts = {
+			-- configuration goes here
+		},
+	},
+	{
+		"kassio/neoterm",
+		lazy = false,
 	},
 }

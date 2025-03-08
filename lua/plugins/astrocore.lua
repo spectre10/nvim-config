@@ -18,15 +18,24 @@ return {
 					command = "set list listchars=tab:»\\ ,trail:·,eol:↲",
 				},
 			},
+			term_binds = {
+				{
+					event = { "TermOpen" },
+					pattern = "term://*",
+					callback = function()
+						vim.api.nvim_buf_set_keymap(0, "t", "jk", "<c-\\><c-n>", { noremap = true })
+					end,
+				},
+			},
 		},
 		-- configure core features of astronvim
 		features = {
 			large_buf = { size = 1024 * 256, lines = 10000 }, -- set global limits for large files for disabling features like treesitter
-			autopairs = true, -- enable autopairs at start
-			cmp = true, -- enable completion at start
-			diagnostics_mode = 3, -- diagnostic mode on start (0 = off, 1 = no signs/virtual text, 2 = no virtual text, 3 = on)
-			highlighturl = true, -- highlight urls at start
-			notifications = true, -- enable notifications at start
+			autopairs = true,                        -- enable autopairs at start
+			cmp = true,                              -- enable completion at start
+			diagnostics_mode = 3,                    -- diagnostic mode on start (0 = off, 1 = no signs/virtual text, 2 = no virtual text, 3 = on)
+			highlighturl = true,                     -- highlight urls at start
+			notifications = true,                    -- enable notifications at start
 		},
 		-- diagnostics configuration (for vim.diagnostics.config({...})) when diagnostics are on
 		diagnostics = {
@@ -35,7 +44,7 @@ return {
 		},
 		-- vim options can be configured here
 		options = {
-			opt = { -- vim.opt.<key>
+			opt = {        -- vim.opt.<key>
 				relativenumber = true, -- sets vim.opt.relativenumber
 				number = true, -- sets vim.opt.number
 				spell = false, -- sets vim.opt.spell
