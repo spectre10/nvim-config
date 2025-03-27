@@ -39,4 +39,5 @@ return {
 			}
 		end,
 	},
+	{ import = "astrocommunity.pack.go" }
 }
